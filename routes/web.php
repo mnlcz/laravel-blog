@@ -28,4 +28,4 @@ Route::get('/posts/{post}', function ($p) {
     return view('post', [
         'post' => $post
     ]);
-});
+})->where('post', '[A-z_\-]+');
