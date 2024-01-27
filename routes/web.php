@@ -18,14 +18,11 @@ Route::get('/', function () {
 });
 
 Route::get('/posts/{post}', function ($p) {
-    $path = __DIR__ . "/../resources/posts/{$p}.html";
-
-    if (!file_exists($path)) {
+    if (!file_exists($path = __DIR__ . "/../resources/posts/{$p}.html")) {
         return redirect('/');
     }
-    $post = file_get_contents($path);
 
-    return view('post', [
-        'post' => $post
-    ]);
+    $post = cache()->remember("posts.{$p}", now()->addMinutes(20), fn() => file_get_contents($path));
+
+    return view('post', ['post' => $post]);
 })->where('post', '[A-z_\-]+');
