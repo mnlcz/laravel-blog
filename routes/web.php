@@ -20,8 +20,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/posts/{post}', function ($name) {
+Route::get('/posts/{post}', function ($filename) {
     return view('post', [
-        'post' => Post::find($name)
+        'post' => Post::find($filename)
     ]);
 })->where('post', '[A-z_\-]+');

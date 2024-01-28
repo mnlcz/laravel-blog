@@ -6,7 +6,15 @@
 <body>
     @foreach ($posts as $post)
         <article>
-            {{ $post }}
+            <h1>
+                <a href="/posts/{{ $post->filename }}">
+                    {{ $post->title }}
+                </a>
+            </h1>
         </article>
+
+        <div>
+            {{ $post->excerpt }}
+        </div>
     @endforeach
 </body>
